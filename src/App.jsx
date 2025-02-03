@@ -5,13 +5,14 @@ import './App.css'
 import { useRef } from 'react'
 
 function App() {
+  const imgRef = useRef(null);
+
   async function fetchLatestImage() {
     try {
       const response = await fetch('https://e159d3d1-img-sender-worker.robotfunny.workers.dev/latest-image'); // Your Worker URL
       if (response.ok) {
         const imageBlob = await response.blob(); // Get the image as a Blob
         const imageUrl = URL.createObjectURL(imageBlob); // Convert the Blob to a URL
-        const imgRef = useRef(null);
 
         // Set the src of the image element to the Blob URL
         const imageElement = document.getElementById('latest-image');
@@ -25,7 +26,15 @@ function App() {
     }
   }
 
-  fetchLatestImage(); // Fetch and display the image when the page loads
+  useEffect(function() {
+    fetchLatestImage(); // Fetch and display the image when the component mounts
+
+    const interval = setInterval(fetchLatestImage, 3000); 
+
+    return function() {
+      clearInterval(interval); // Cleanup interval on component unmount
+    };
+  }, []); // Empt
 
   return (
     <>
