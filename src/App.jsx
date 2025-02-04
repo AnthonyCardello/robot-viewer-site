@@ -6,6 +6,7 @@ import { useRef } from 'react'
 
 function App() {
   const imgRef = useRef(null);
+  const [isRunning, setIsRunning] = useState(true);
 
   async function fetchLatestImage() {
     try {
@@ -31,19 +32,26 @@ function App() {
     }
   }
 
-  // useEffect(function() {
-  //   fetchLatestImage(); // Fetch and display the image when the component mounts
+  useEffect(function() {
+    if(isRunning){
 
-  //   const interval = setInterval(fetchLatestImage, 30000000); 
+    fetchLatestImage(); 
+    const interval = setInterval(fetchLatestImage, 3000); 
+    return function() {
+      clearInterval(interval); // Cleanup interval on component unmount
+    }
+  }
+  }, [isRunning]); // Empt
 
-  //   return function() {
-  //     clearInterval(interval); // Cleanup interval on component unmount
-  //   };
-  // }, []); // Empt
-
+  function toggleInterval() {
+    setIsRunning(!isRunning); // Toggle the isRunning state
+  }
   return (
     <>
-       <img ref={imgRef} alt="Live video feed" />      
+       <img ref={imgRef} alt="Live video feed" />   
+       <button onClick={toggleInterval}>
+        {isRunning ? 'Stop' : 'Start'} Interval
+      </button>   
     </>
   );
 }
