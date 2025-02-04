@@ -38,7 +38,7 @@ function App() {
 
   return (
     <>
-       <img ref={imgref} alt="Live video feed" />      
+       <img ref={imgRef} alt="Live video feed" />      
     </>
   );
 }
