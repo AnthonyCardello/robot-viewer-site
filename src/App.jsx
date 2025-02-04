@@ -36,7 +36,7 @@ function App() {
     if(isRunning){
 
     fetchLatestImage(); 
-    const interval = setInterval(fetchLatestImage, 100); 
+    const interval = setInterval(fetchLatestImage, 500); 
     return function() {
       clearInterval(interval); // Cleanup interval on component unmount
     }
