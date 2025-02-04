@@ -9,7 +9,12 @@ function App() {
 
   async function fetchLatestImage() {
     try {
-      const response = await fetch('https://1d22889e-img-sender-worker.robotfunny.workers.dev/latest-image'); // Your Worker URL
+      const response = await fetch('https://img-sender-worker.robotfunny.workers.dev/latest-image', {
+        headers: {
+          'Accept': 'image/jpeg',
+        }
+      }); 
+
       if (response.ok) {
         const imageBlob = await response.blob(); // Get the image as a Blob
         const imageUrl = URL.createObjectURL(imageBlob); // Convert the Blob to a URL
