@@ -31,15 +31,15 @@ function App() {
     }
   }
 
-  useEffect(function() {
-    fetchLatestImage(); // Fetch and display the image when the component mounts
+  // useEffect(function() {
+  //   fetchLatestImage(); // Fetch and display the image when the component mounts
 
-    const interval = setInterval(fetchLatestImage, 3000); 
+  //   const interval = setInterval(fetchLatestImage, 30000000); 
 
-    return function() {
-      clearInterval(interval); // Cleanup interval on component unmount
-    };
-  }, []); // Empt
+  //   return function() {
+  //     clearInterval(interval); // Cleanup interval on component unmount
+  //   };
+  // }, []); // Empt
 
   return (
     <>
